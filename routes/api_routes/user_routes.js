@@ -1,5 +1,5 @@
 const { routesError } = require('../helpers');
-
+const { User } = require('../../models')
 const router = require('express').Router();
 
 // GET ALL USERS
