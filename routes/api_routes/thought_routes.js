@@ -29,7 +29,13 @@ router.get('/thoughts/:thought_id', async(req,res) => {
 
 // Route to post new thought
 router.post('/thoughts', async(req, res) => {
+  try {
+    const newThought = await Thought.create(req.body);
 
+    res.json(newThought)
+  } catch (err) {
+    routesError(err,res)
+  }
 })
 
 // Route to update thought by id
@@ -39,6 +45,17 @@ router.put('/thoughts/:thought_id', async(req, res) => {
 
 // Route to delete thought by id
 router.delete('/thoughts/:thought_id', async(req, res) => {
+
+
+  try {
+    await Thought.deleteOne({id: req.params.thought_id});
+
+    res.json({
+     message: 'User deleted successfully!'
+    })
+ } catch (err) {
+   routesError(err,res)
+ }
 
 })
 
