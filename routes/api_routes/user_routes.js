@@ -6,19 +6,26 @@ const router = require('express').Router();
 router.get('/users', async (req,res) => {
   try {
     
-  } catch (error) {
-    
+    const users = await User.find();
+
+    res.json(users)
+  } catch (err) {
+    routesError(err,res)
   }
 });
 
 // GET USER BY ID
 router.get('/user/:user_id', async (req,res) => {
   try {
-    const userId = await User.findById(rec.params.user_id);
+    const userId = await User.findById(req.params.user_id);
+
+    if(userId) return res.status(404).json({
+      message: 'User with ID not found'
+    });
 
     res.json(userId);
-  } catch (error) {
+  } catch (err) {
     
-    routesError(error, res)
+    routesError(err, res)
   }
 });
