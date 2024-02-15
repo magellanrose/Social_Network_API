@@ -19,8 +19,8 @@ router.get('/user/:user_id', async (req, res) => {
   try {
     const userId = await User.findById(req.params.user_id);
 
-    if (userId) return res.status(404).json({
-      message: 'User with ID not found'
+    if (!userId) return res.status(404).json({
+      message: 'User with that ID not found'
     });
 
     res.json(userId);
@@ -43,9 +43,32 @@ router.post('/users', async (req, res) => {
 
 // Route to update(put) a user by its ID
 router.put('/users/:user_id', async (req, res) => {
-  const { username, email, thoughts, friends } = req.body;
+  const { password, email, newPassword } = req.body;
   try {
+    if(email) {
+      const userUpdate = await User.findByIdAndUpdate(req.params.user_id, {
+        $set: {
+          email: email
+        }
+      }, { new: true});
 
+      res.json(userUpdate);
+    }
+
+    if (password) {
+      const userPass = await User.findById(req.params.user_id);
+      if (!userPass) return res.status(404).json({
+        message: 'User with ID not found'
+      })
+
+      const pass_correct = await userUpdate.validatePass(password);
+      if (!pass_correct) return res.status(401).json({
+        message: 'The old password is incorrect'
+      });
+      userPass.password = newPassword;
+      userPass.save();
+      res.json(userPass)
+    }
   } catch (err) {
     routesError(err,res)
   }

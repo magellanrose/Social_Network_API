@@ -34,7 +34,26 @@ const userSchema = new Schema({
     id: false
   });
 
+userSchema.pre('save', async (next) => {
+  if (this.isNew) {
+    this.password = await hash(this.password, 10);
+  }
+  next();
+});
 
+userSchema.methods.validatePass = async function (formPassword) {
+  const is_valid = await compare(formPassword, this.password);
+
+  return is_valid
+};
+
+userSchema.set('toJSON', {
+  transform: (_, user) => {
+    delete user.password;
+    delete user.__v;
+    return user;
+  }
+});
 
 const User = model('User', userSchema);
 
