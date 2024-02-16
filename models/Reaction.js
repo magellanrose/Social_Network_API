@@ -1,5 +1,6 @@
 const { model, Schema } = require('mongoose');
 const { hash, compare } = require('bcrypt');
+const dayjs = require('dayjs')
 
 
 
@@ -21,7 +22,8 @@ const reactionSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+    get: function(time) {
+      return dayjs(time).format('MMM/DD/YYYY hh:mm a')}
   }
 });
 
