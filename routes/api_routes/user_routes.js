@@ -90,7 +90,7 @@ router.delete('/users/:user_id', async (req, res) => {
 })
 
 // Create friend
-router.get('/friends', async (req, res) => {
+router.post('/friends', async (req, res) => {
   try {
     const friend = await User.create(req.body);
 

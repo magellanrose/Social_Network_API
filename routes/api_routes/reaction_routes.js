@@ -21,7 +21,7 @@ router.delete('/reactions/:reactions_id', async (req, res) =>{
     await Reaction.deleteOne({id: req.params.reactions_id})
 
     res.json({
-      message: 'User deleted succesfully'
+      message: 'Reaction deleted succesfully'
     })
   } catch (err) {
     routesError(err,res)
