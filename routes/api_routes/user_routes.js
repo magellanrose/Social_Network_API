@@ -89,5 +89,31 @@ router.delete('/users/:user_id', async (req, res) => {
 
 })
 
+// Create friend
+router.get('/friends', async (req, res) => {
+  try {
+    const friend = await User.create(req.body);
+
+    res.json(friend)
+  } catch (err) {
+    routesError(err,res);
+    
+  }
+});
+
+// Delete Friend by ID
+router.delete('/friends/:friend_id', async (req, res) =>{
+  try {
+    await User.deleteOne({id: req.params.friend_id})
+
+    res.json({
+      message: 'User deleted succesfully'
+    })
+  } catch (err) {
+    routesError(err,res)
+  }
+})
+
+
 
 module.exports = router
