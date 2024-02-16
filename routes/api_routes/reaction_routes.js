@@ -1,4 +1,4 @@
-const Reaction = require('../../models/Reaction');
+const { Reaction } = require('../../models/');
 const { routesError } = require('../helpers/index');
 const router = require('express').Router();
 

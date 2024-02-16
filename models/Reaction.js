@@ -25,10 +25,16 @@ const reactionSchema = new Schema({
     get: function(time) {
       return dayjs(time).format('MMM/DD/YYYY hh:mm a')}
   }
+},
+{
+ toJSON: {
+  getters: true
+ },
+ id: false
 });
 
 
 
-const Reaction = model('Reaction', reactionSchema);
+//const Reaction = model('Reaction', reactionSchema);
 
-module.exports = Reaction;
+module.exports = reactionSchema;

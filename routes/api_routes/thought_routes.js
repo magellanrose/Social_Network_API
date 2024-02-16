@@ -1,5 +1,5 @@
 const { routesError } = require('../helpers');
-const { Thought } = require('../../models/Thought');
+const { Thought } = require('../../models');
 const router = require('express').Router();
 
 // GET ALL THOUGHT

@@ -1,5 +1,9 @@
 const { model, Schema } = require('mongoose');
+const reactionSchema = require('./Reaction');
 const { hash, compare } = require('bcrypt');
+const dayjs = require('dayjs')
+
+
 
 const thoughtSchema = new Schema({
   thoughtText: {
@@ -11,12 +15,14 @@ const thoughtSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+    get: function(time) {
+      return dayjs(time).format('MMM/DD/YYYY hh:mm a')}
   },
   username: {
     type: String,
     required: true
   },
+  reactions: [reactionSchema]
 },
 
   {
@@ -27,7 +33,9 @@ const thoughtSchema = new Schema({
     id: false
   });
 
-
+thoughtSchema.virtual('reactionCount').get(function(){
+  return this.reactions.length;
+});
 
 const Thought = model('Thought', thoughtSchema);
 
