@@ -4,7 +4,7 @@ const router = require('express').Router();
 
 
 // Create Reaction
-router.get('/reactions', async (req, res) => {
+router.post('/reactions', async (req, res) => {
   try {
     const reactions = await Reaction.create(req.body);
 

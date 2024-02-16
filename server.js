@@ -12,12 +12,11 @@ const user_routes = require('./routes/api_routes');
 // MIDDLEWARE
 app.use(express.json());
 
-app.use('/api', [
+app.use('/api', 
   user_routes
-])
+)
 
 // LOAD ROUTES
-app.use(user_routes)
 connection.on('open', () => {
   app.listen(PORT, () => console.log('server started on port', PORT));
 });

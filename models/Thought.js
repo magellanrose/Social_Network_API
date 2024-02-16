@@ -1,5 +1,5 @@
 const { model, Schema } = require('mongoose');
-const reactionSchema = require('./Reaction');
+// const reactionSchema = require('./Reaction');
 const { hash, compare } = require('bcrypt');
 const dayjs = require('dayjs')
 
@@ -22,7 +22,11 @@ const thoughtSchema = new Schema({
     type: String,
     required: true
   },
-  reactions: [reactionSchema]
+  reactions: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Reaction'
+
+  }]
 },
 
   {

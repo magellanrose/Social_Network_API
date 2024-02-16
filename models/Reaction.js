@@ -1,4 +1,4 @@
-const { model, Schema } = require('mongoose');
+const { model, Schema, Types } = require('mongoose');
 const { hash, compare } = require('bcrypt');
 const dayjs = require('dayjs')
 
@@ -35,6 +35,6 @@ const reactionSchema = new Schema({
 
 
 
-//const Reaction = model('Reaction', reactionSchema);
+const Reaction = model('Reaction', reactionSchema);
 
-module.exports = reactionSchema;
+module.exports = Reaction;
